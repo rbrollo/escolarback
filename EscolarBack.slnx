@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Escolar.Api/Escolar.Api.csproj" />
+  <Project Path="Escolar.Application/Escolar.Application.csproj" />
+  <Project Path="Escolar.Domain/Escolar.Domain.csproj" />
+  <Project Path="Escolar.Infrastructure/Escolar.Infrastructure.csproj" />
+</Solution>

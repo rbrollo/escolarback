@@ -1,0 +1,17 @@
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\bin\Debug\net10.0\Escolar.Infrastructure.deps.json
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\bin\Debug\net10.0\Escolar.Infrastructure.runtimeconfig.json
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\bin\Debug\net10.0\Escolar.Infrastructure.dll
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\bin\Debug\net10.0\Escolar.Infrastructure.pdb
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\bin\Debug\net10.0\Escolar.Domain.dll
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\bin\Debug\net10.0\Escolar.Domain.pdb
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.csproj.AssemblyReference.cache
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.AssemblyInfoInputs.cache
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.AssemblyInfo.cs
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar..87AA7592.Up2Date
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.dll
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\refint\Escolar.Infrastructure.dll
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.pdb
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\Escolar.Infrastructure.genruntimeconfig.cache
+D:\Dev\Escolar\EscolarBack\Escolar.Infrastructure\obj\Debug\net10.0\ref\Escolar.Infrastructure.dll
