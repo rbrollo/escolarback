@@ -1,27 +1,27 @@
-using Escolar.Domain.Entities;
+using Escolar.Domain.Entities.Aluno;
 using Escolar.Domain.Enums;
-using Escolar.Domain.Repositories;
+using Escolar.Domain.Repositories.Aluno;
 using Escolar.Domain.Utils;
 using Escolar.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Escolar.Infrastructure.Repositories;
+namespace Escolar.Infrastructure.Repositories.Aluno;
 
-public class AlunoRepositorio : IAlunoRepositorio
+public class AlunoRepository : IAlunoRepository
 {
     private readonly EscolarDbContext _contexto;
 
-    public AlunoRepositorio(EscolarDbContext contexto)
+    public AlunoRepository(EscolarDbContext contexto)
     {
         _contexto = contexto;
     }
 
-    public Task<(List<Aluno> Itens, int TotalItens)> ListarAsync(int pagina, int tamanhoPagina)
+    public Task<(List<AlunoEntity> Itens, int TotalItens)> ListarAsync(int pagina, int tamanhoPagina)
     {
         return ListarAsync(pagina, tamanhoPagina, null);
     }
 
-    public async Task<(List<Aluno> Itens, int TotalItens)> ListarAsync(int pagina, int tamanhoPagina, string? nome)
+    public async Task<(List<AlunoEntity> Itens, int TotalItens)> ListarAsync(int pagina, int tamanhoPagina, string? nome)
     {
         var query = _contexto.Alunos
             .AsNoTracking()
@@ -43,7 +43,7 @@ public class AlunoRepositorio : IAlunoRepositorio
         return (itens, totalItens);
     }
 
-    public async Task<Aluno?> ObterPorIdAsync(Guid id)
+    public async Task<AlunoEntity?> ObterPorIdAsync(Guid id)
     {
         return await _contexto.Alunos
             .FirstOrDefaultAsync(x => x.Id == id && x.Status == StatusRegistroEnum.Ativo);
@@ -56,7 +56,7 @@ public class AlunoRepositorio : IAlunoRepositorio
             .AnyAsync(x => x.Cpf == cpf && (!ignorarId.HasValue || x.Id != ignorarId.Value));
     }
 
-    public async Task<Aluno> AdicionarAsync(Aluno aluno)
+    public async Task<AlunoEntity> AdicionarAsync(AlunoEntity aluno)
     {
         aluno.CreatedAt = HorarioBrasil.Agora;
         aluno.UpdatedAt = null;
@@ -69,7 +69,7 @@ public class AlunoRepositorio : IAlunoRepositorio
         return aluno;
     }
 
-    public async Task<Aluno?> AtualizarAsync(Aluno aluno)
+    public async Task<AlunoEntity?> AtualizarAsync(AlunoEntity aluno)
     {
         var alunoExistente = await _contexto.Alunos.FirstOrDefaultAsync(x => x.Id == aluno.Id && x.Status == StatusRegistroEnum.Ativo);
         if (alunoExistente is null)

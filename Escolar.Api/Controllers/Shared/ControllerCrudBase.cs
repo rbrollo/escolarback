@@ -1,20 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
-using Escolar.Application.Dtos;
+using Escolar.Application.Dtos.Shared;
 using Escolar.Application.Exceptions;
-using Escolar.Application.Services;
+using Escolar.Application.Services.Shared;
 
-namespace Escolar.Api.Controllers;
+namespace Escolar.Api.Controllers.Shared;
 
 [ApiController]
 [Route("api/[controller]")]
-public abstract class ControladorCrudBase<TLeituraDto, TCriarDto, TAtualizarDto> : ControllerBase
+public abstract class ControllerCrudBase<TLeituraDto, TCriarDto, TAtualizarDto> : ControllerBase
     where TLeituraDto : class, IRespostaComId
 {
-    private readonly IServicoCrud<TLeituraDto, TCriarDto, TAtualizarDto> _servicoCrud;
+    private readonly IServiceCrud<TLeituraDto, TCriarDto, TAtualizarDto> _serviceCrud;
 
-    protected ControladorCrudBase(IServicoCrud<TLeituraDto, TCriarDto, TAtualizarDto> servicoCrud)
+    protected ControllerCrudBase(IServiceCrud<TLeituraDto, TCriarDto, TAtualizarDto> serviceCrud)
     {
-        _servicoCrud = servicoCrud;
+        _serviceCrud = serviceCrud;
     }
 
     [HttpGet]
@@ -32,14 +32,14 @@ public abstract class ControladorCrudBase<TLeituraDto, TCriarDto, TAtualizarDto>
             PageSize = pageSize
         };
 
-        var registros = await _servicoCrud.ListarAsync(consulta);
+        var registros = await _serviceCrud.ListarAsync(consulta);
         return Ok(registros);
     }
 
     [HttpGet("{id:guid}")]
     public virtual async Task<ActionResult<TLeituraDto>> ObterPorId(Guid id)
     {
-        var registro = await _servicoCrud.ObterPorIdAsync(id);
+        var registro = await _serviceCrud.ObterPorIdAsync(id);
         if (registro is null)
         {
             return NotFound("Registro nao encontrado.");
@@ -53,7 +53,7 @@ public abstract class ControladorCrudBase<TLeituraDto, TCriarDto, TAtualizarDto>
     {
         try
         {
-            var registroCriado = await _servicoCrud.CriarAsync(dto);
+            var registroCriado = await _serviceCrud.CriarAsync(dto);
             return CreatedAtAction(nameof(ObterPorId), new { id = registroCriado.Id }, registroCriado);
         }
         catch (ValidacaoException ex)
@@ -67,7 +67,7 @@ public abstract class ControladorCrudBase<TLeituraDto, TCriarDto, TAtualizarDto>
     {
         try
         {
-            var registroAtualizado = await _servicoCrud.AtualizarAsync(id, dto);
+            var registroAtualizado = await _serviceCrud.AtualizarAsync(id, dto);
             if (registroAtualizado is null)
             {
                 return NotFound("Registro nao encontrado.");
@@ -84,7 +84,7 @@ public abstract class ControladorCrudBase<TLeituraDto, TCriarDto, TAtualizarDto>
     [HttpDelete("{id:guid}")]
     public virtual async Task<IActionResult> Remover(Guid id)
     {
-        var removido = await _servicoCrud.RemoverAsync(id);
+        var removido = await _serviceCrud.RemoverAsync(id);
         if (!removido)
         {
             return NotFound("Registro nao encontrado.");

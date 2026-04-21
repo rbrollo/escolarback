@@ -1,4 +1,4 @@
-namespace Escolar.Application.Dtos;
+namespace Escolar.Application.Dtos.Shared;
 
 public interface IRespostaComId
 {

@@ -1,9 +1,9 @@
-using Escolar.Domain.Models;
+using Escolar.Domain.Models.Shared;
 
-namespace Escolar.Domain.Repositories;
+namespace Escolar.Domain.Repositories.Shared;
 
-public interface IRepositorioCrud<TEntity>
-    where TEntity : ModeloBase
+public interface IRepositoryCrud<TEntity>
+    where TEntity : ModelBase
 {
     Task<(List<TEntity> Itens, int TotalItens)> ListarAsync(int pagina, int tamanhoPagina);
     Task<TEntity?> ObterPorIdAsync(Guid id);

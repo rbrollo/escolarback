@@ -1,7 +1,7 @@
-using Escolar.Application.Services;
-using Escolar.Domain.Repositories;
+using Escolar.Application.Services.Aluno;
+using Escolar.Domain.Repositories.Aluno;
 using Escolar.Infrastructure.Persistence;
-using Escolar.Infrastructure.Repositories;
+using Escolar.Infrastructure.Repositories.Aluno;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
@@ -30,8 +30,8 @@ builder.Services.AddDbContext<EscolarDbContext>(options =>
     options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 4, 0)));
 });
 
-builder.Services.AddScoped<IAlunoRepositorio, AlunoRepositorio>();
-builder.Services.AddScoped<IServicoAluno, ServicoAluno>();
+builder.Services.AddScoped<IAlunoRepository, AlunoRepository>();
+builder.Services.AddScoped<IServiceAluno, ServiceAluno>();
 
 var app = builder.Build();
 

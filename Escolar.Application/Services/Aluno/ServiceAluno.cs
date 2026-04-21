@@ -1,18 +1,20 @@
-using Escolar.Application.Dtos;
+using Escolar.Application.Dtos.Aluno;
+using Escolar.Application.Dtos.Shared;
 using Escolar.Application.Exceptions;
-using Escolar.Domain.Entities;
-using Escolar.Domain.Repositories;
+using Escolar.Application.Services.Shared;
+using Escolar.Domain.Entities.Aluno;
+using Escolar.Domain.Repositories.Aluno;
 
-namespace Escolar.Application.Services;
+namespace Escolar.Application.Services.Aluno;
 
-public class ServicoAluno : ServicoCrudBase<Aluno, AlunoRespostaDto, AlunoCriarDto, AlunoAtualizarDto>, IServicoAluno
+public class ServiceAluno : ServiceCrudBase<AlunoEntity, AlunoRespostaDto, AlunoCriarDto, AlunoAtualizarDto>, IServiceAluno
 {
-    private readonly IAlunoRepositorio _alunoRepositorio;
+    private readonly IAlunoRepository _alunoRepository;
 
-    public ServicoAluno(IAlunoRepositorio alunoRepositorio)
-        : base(alunoRepositorio)
+    public ServiceAluno(IAlunoRepository alunoRepository)
+        : base(alunoRepository)
     {
-        _alunoRepositorio = alunoRepositorio;
+        _alunoRepository = alunoRepository;
     }
 
     public override async Task<AlunoRespostaDto> CriarAsync(AlunoCriarDto dto)
@@ -33,7 +35,7 @@ public class ServicoAluno : ServicoCrudBase<Aluno, AlunoRespostaDto, AlunoCriarD
         var tamanhoPagina = consulta.ObterTamanhoPagina();
         var paginaNormalizada = pagina < 1 ? 1 : pagina;
         var tamanhoPaginaNormalizado = tamanhoPagina < 1 ? 10 : tamanhoPagina;
-        var (itens, totalItens) = await _alunoRepositorio.ListarAsync(
+        var (itens, totalItens) = await _alunoRepository.ListarAsync(
             paginaNormalizada,
             tamanhoPaginaNormalizado,
             consulta.Nome);
@@ -46,9 +48,9 @@ public class ServicoAluno : ServicoCrudBase<Aluno, AlunoRespostaDto, AlunoCriarD
             MapearParaResposta);
     }
 
-    protected override Aluno CriarEntidade(AlunoCriarDto alunoCriarDto)
+    protected override AlunoEntity CriarEntidade(AlunoCriarDto alunoCriarDto)
     {
-        return new Aluno
+        return new AlunoEntity
         {
             Nome = alunoCriarDto.Nome,
             Cpf = alunoCriarDto.Cpf,
@@ -57,7 +59,7 @@ public class ServicoAluno : ServicoCrudBase<Aluno, AlunoRespostaDto, AlunoCriarD
         };
     }
 
-    protected override void AtualizarEntidade(Aluno alunoExistente, AlunoAtualizarDto alunoAtualizarDto)
+    protected override void AtualizarEntidade(AlunoEntity alunoExistente, AlunoAtualizarDto alunoAtualizarDto)
     {
         alunoExistente.Nome = alunoAtualizarDto.Nome;
         alunoExistente.Cpf = alunoAtualizarDto.Cpf;
@@ -65,7 +67,7 @@ public class ServicoAluno : ServicoCrudBase<Aluno, AlunoRespostaDto, AlunoCriarD
         alunoExistente.Email = alunoAtualizarDto.Email;
     }
 
-    protected override AlunoRespostaDto MapearParaResposta(Aluno aluno)
+    protected override AlunoRespostaDto MapearParaResposta(AlunoEntity aluno)
     {
         return new AlunoRespostaDto
         {
@@ -82,7 +84,7 @@ public class ServicoAluno : ServicoCrudBase<Aluno, AlunoRespostaDto, AlunoCriarD
 
     private async Task ValidarCpfDuplicadoAsync(string cpf, Guid? ignorarId = null)
     {
-        if (await _alunoRepositorio.ExisteCpfAsync(cpf, ignorarId))
+        if (await _alunoRepository.ExisteCpfAsync(cpf, ignorarId))
         {
             throw new ValidacaoException("Ja existe um aluno cadastrado com este CPF.");
         }

@@ -1,6 +1,7 @@
+using Escolar.Application.Dtos.Shared;
 using Escolar.Domain.Enums;
 
-namespace Escolar.Application.Dtos;
+namespace Escolar.Application.Dtos.Aluno;
 
 public class AlunoRespostaDto : IRespostaComId
 {

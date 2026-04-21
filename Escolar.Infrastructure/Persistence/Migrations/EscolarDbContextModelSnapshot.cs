@@ -22,7 +22,7 @@ namespace Escolar.Infrastructure.Persistence.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Escolar.Domain.Entities.Aluno", b =>
+            modelBuilder.Entity("Escolar.Domain.Entities.Aluno.AlunoEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

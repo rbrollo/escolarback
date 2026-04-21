@@ -1,8 +1,8 @@
-using Escolar.Application.Dtos;
+using Escolar.Application.Dtos.Shared;
 
-namespace Escolar.Application.Services;
+namespace Escolar.Application.Services.Shared;
 
-public interface IServicoCrud<TLeituraDto, in TCriarDto, in TAtualizarDto>
+public interface IServiceCrud<TLeituraDto, in TCriarDto, in TAtualizarDto>
     where TLeituraDto : class, IRespostaComId
 {
     Task<RespostaPaginadaDto<TLeituraDto>> ListarAsync(ConsultaPaginadaDto consulta);

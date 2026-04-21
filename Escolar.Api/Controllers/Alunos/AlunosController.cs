@@ -1,11 +1,13 @@
-using Escolar.Application.Dtos;
-using Escolar.Application.Services;
+using Escolar.Application.Dtos.Aluno;
+using Escolar.Application.Dtos.Shared;
+using Escolar.Application.Services.Aluno;
+using Escolar.Api.Controllers.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Escolar.Api.Controllers;
+namespace Escolar.Api.Controllers.Alunos;
 
-public class AlunosController(IServicoAluno servicoAluno)
-    : ControladorCrudBase<AlunoRespostaDto, AlunoCriarDto, AlunoAtualizarDto>(servicoAluno)
+public class AlunosController(IServiceAluno serviceAluno)
+    : ControllerCrudBase<AlunoRespostaDto, AlunoCriarDto, AlunoAtualizarDto>(serviceAluno)
 {
     [HttpGet]
     public override async Task<ActionResult<RespostaPaginadaDto<AlunoRespostaDto>>> Listar(
@@ -23,7 +25,7 @@ public class AlunosController(IServicoAluno servicoAluno)
             Nome = Request.Query["nome"]
         };
 
-        var registros = await servicoAluno.ListarAsync(consulta);
+        var registros = await serviceAluno.ListarAsync(consulta);
         return Ok(registros);
     }
 }

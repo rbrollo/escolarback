@@ -1,4 +1,4 @@
-using Escolar.Domain.Entities;
+using Escolar.Domain.Entities.Aluno;
 using Microsoft.EntityFrameworkCore;
 
 namespace Escolar.Infrastructure.Persistence;
@@ -9,13 +9,13 @@ public class EscolarDbContext : DbContext
     {
     }
 
-    public DbSet<Aluno> Alunos => Set<Aluno>();
+    public DbSet<AlunoEntity> Alunos => Set<AlunoEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Aluno>(entity =>
+        modelBuilder.Entity<AlunoEntity>(entity =>
         {
             entity.ToTable("alunos");
             entity.HasKey(x => x.Id);

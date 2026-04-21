@@ -1,8 +1,8 @@
-using Escolar.Domain.Models;
+using Escolar.Domain.Models.Shared;
 
-namespace Escolar.Domain.Entities;
+namespace Escolar.Domain.Entities.Aluno;
 
-public class Aluno : ModeloBase
+public class AlunoEntity : ModelBase
 {
     public string Nome { get; set; } = string.Empty;
     public string Cpf { get; set; } = string.Empty;
